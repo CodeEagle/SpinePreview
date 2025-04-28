@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spine Preview</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #drop-area {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        text-align: center;
+      }
+      #drop-area.highlight {
+        border-color: purple;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BanArUjQ.js"></script>
+  </head>
+  <body>
+    <h1>Spine File Preview</h1>
+    <div id="drop-area">
+      <p>Drag & drop a folder here</p>
+    </div>
+    <div style="margin:20px">
+ 
+</div>
+<div id="player-container" style="width:100%; height:70%"></div>
+<link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.80/dist/spine-player.css">
+  </body>
+</html>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  #player-container {
+    flex: 1;
+    position: relative;
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    margin-top: 20px;
+  }
+  #player-container canvas {
+    width: 100%;
+    height: 100%;
+  }
+</style>

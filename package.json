@@ -1,0 +1,17 @@
+{
+  "name": "spine-preview",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.2.8"
+  },
+  "dependencies": {
+    "@esotericsoftware/spine-core": "^4.2.80",
+    "@esotericsoftware/spine-player": "^4.2.80",
+    "@esotericsoftware/spine-webgl": "^4.2.80",
+    "spine-ts": "^1.0.0"
+  }
+}

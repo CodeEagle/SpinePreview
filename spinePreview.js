@@ -99,4 +99,3 @@ if (fileMap.has("json") || fileMap.has("skel")) {
   // 初始化Spine播放器
   new SpinePlayer('player-container', config);
 }
-

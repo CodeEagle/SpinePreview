@@ -24,7 +24,7 @@
       <p>Drag & drop a folder here</p>
     </div>
     <script type="module">
-      import { handleFiles } from './assets/spinePreview.js';
+      import * as sp from './assets/spinePreview.js';
       
       const dropArea = document.getElementById("drop-area");
 
@@ -59,7 +59,7 @@
       function handleDrop(e) {
         const dt = e.dataTransfer;
         const items = [...dt.items];
-        handleFiles(items);
+        sp.handleFiles(items);
       }
     </script>
     <div style="margin:20px">
@@ -68,7 +68,8 @@
 <div id="player-container" style="width:100%; height:70%"></div>
 <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.80/dist/spine-player.css">
     <script type="module">
-      import { parseAndRenderSpineFile } from './spinePreview.js';
+      import * as sp from './assets/spinePreview.js';
+        
 
       function handleFiles(items) {
   // 统一处理拖放和本地选择的文件项
@@ -84,7 +85,7 @@
           const file = fileMap.get(ext)[0];
           const reader = new FileReader();
           reader.onload = (event) => {
-            parseAndRenderSpineFile(event.target.result, fileMap, ext);
+            sp.parseAndRenderSpineFile(event.target.result, fileMap, ext);
           };
           if (ext === 'json') {
             reader.readAsText(file);

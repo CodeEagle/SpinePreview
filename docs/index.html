@@ -17,18 +17,83 @@
         border-color: purple;
       }
     </style>
-    <script type="text/javascript"  src="assets/spinePreview.js"></script>
   </head>
   <body>
     <h1>Spine File Preview</h1>
     <div id="drop-area">
       <p>Drag & drop a folder here</p>
     </div>
+    <script type="module">
+      import { handleFiles } from './assets/spinePreview.js';
+      
+      const dropArea = document.getElementById("drop-area");
+
+      // 保留事件监听逻辑
+      ;["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ;["dragenter", "dragover"].forEach((eventName) => {
+        dropArea.addEventListener(
+          eventName,
+          () => dropArea.classList.add("highlight"),
+          false,
+        );
+      });
+
+      ;["dragleave", "drop"].forEach((eventName) => {
+        dropArea.addEventListener(
+          eventName,
+          () => dropArea.classList.remove("highlight"),
+          false,
+        );
+      });
+
+      dropArea.addEventListener("drop", handleDrop, false);
+
+      function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const items = [...dt.items];
+        handleFiles(items);
+      }
+    </script>
     <div style="margin:20px">
  
 </div>
 <div id="player-container" style="width:100%; height:70%"></div>
 <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.80/dist/spine-player.css">
+    <script type="module">
+      import { parseAndRenderSpineFile } from './spinePreview.js';
+
+      function handleFiles(items) {
+  // 统一处理拖放和本地选择的文件项
+  const files = items?.length ? items : Array.from(document.getElementById('localFiles').files);
+        const fileMap = new Map();
+        [...files].forEach(file => {
+          const ext = file.name.split('.').pop();
+          fileMap.set(ext, file);
+        });
+
+        if (fileMap.has('json') || fileMap.has('skel')) {
+          const ext = fileMap.has('json') ? 'json' : 'skel';
+          const file = fileMap.get(ext)[0];
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            parseAndRenderSpineFile(event.target.result, fileMap, ext);
+          };
+          if (ext === 'json') {
+            reader.readAsText(file);
+          } else {
+            reader.readAsArrayBuffer(file);
+          }
+        }
+      }
+    </script>
   </body>
 </html>
 <style>

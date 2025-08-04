@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "terser": "^5.43.1",
     "vite": "^5.2.8"
   },
   "dependencies": {

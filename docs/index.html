@@ -17,6 +17,7 @@
         border-color: purple;
       }
     </style>
+    <script type="text/javascript" src="./assets/spinePreview.js"></script>
   </head>
   <body>
     <h1>Spine File Preview</h1>
@@ -24,8 +25,7 @@
       <p>Drag & drop a folder here</p>
     </div>
     <script type="module">
-      import * as sp from './assets/spinePreview.js';
-      
+    
       const dropArea = document.getElementById("drop-area");
 
       // 保留事件监听逻辑
@@ -59,7 +59,7 @@
       function handleDrop(e) {
         const dt = e.dataTransfer;
         const items = [...dt.items];
-        sp.handleFiles(items);
+        handleFiles(items);
       }
     </script>
     <div style="margin:20px">
@@ -68,9 +68,7 @@
 <div id="player-container" style="width:100%; height:70%"></div>
 <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.80/dist/spine-player.css">
     <script type="module">
-      import * as sp from './assets/spinePreview.js';
-        
-
+      
       function handleFiles(items) {
   // 统一处理拖放和本地选择的文件项
   const files = items?.length ? items : Array.from(document.getElementById('localFiles').files);
@@ -85,7 +83,7 @@
           const file = fileMap.get(ext)[0];
           const reader = new FileReader();
           reader.onload = (event) => {
-            sp.parseAndRenderSpineFile(event.target.result, fileMap, ext);
+            parseAndRenderSpineFile(event.target.result, fileMap, ext);
           };
           if (ext === 'json') {
             reader.readAsText(file);

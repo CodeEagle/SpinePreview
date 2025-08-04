@@ -59,7 +59,7 @@
       function handleDrop(e) {
         const dt = e.dataTransfer;
         const items = [...dt.items];
-        handleFiles(items);
+        SpinePreview.handleFiles(items);
       }
     </script>
     <div style="margin:20px">
@@ -83,7 +83,7 @@
           const file = fileMap.get(ext)[0];
           const reader = new FileReader();
           reader.onload = (event) => {
-            parseAndRenderSpineFile(event.target.result, fileMap, ext);
+            SpinePreview.parseAndRenderSpineFile(event.target.result, fileMap, ext);
           };
           if (ext === 'json') {
             reader.readAsText(file);
